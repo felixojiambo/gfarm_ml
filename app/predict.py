@@ -14,3 +14,15 @@ def predict_price(input_data):
     
     predicted_price = model.predict(input_df)[0]
     return predicted_price
+
+if __name__ == '__main__':
+    input_data = {
+        'year': 2023,
+        'month': 7,
+        'day': 10,
+        'commodity_wheat': 1,
+        'commodity_rice': 0,
+        'market_Nairobi': 1,
+        'market_Kisumu': 0
+    }
+    print(f'Predicted Price: {predict_price(input_data)}')
