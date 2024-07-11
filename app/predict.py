@@ -4,8 +4,15 @@ import pandas as pd
 def predict_price(input_data):
     model = joblib.load('models/commodity_price_model.pkl')
     
-    # Assuming input_data is a dictionary
+    # input_data is a dictionary
     input_df = pd.DataFrame([input_data])
+    
+    # Ensure 'commodity' and 'market' keys are in input_data
+    required_columns = ['commodity', 'market']
+    for col in required_columns:
+        if col not in input_df.columns:
+            raise KeyError(f"The input data must include the column '{col}'")
+
     input_df = pd.get_dummies(input_df, columns=['commodity', 'market'])
     
     # Ensure the input data has the same columns as the training data
@@ -20,9 +27,10 @@ if __name__ == '__main__':
         'year': 2023,
         'month': 7,
         'day': 10,
-        'commodity_wheat': 1,
-        'commodity_rice': 0,
-        'market_Nairobi': 1,
-        'market_Kisumu': 0
+        'commodity': 'wheat',   # Updated to include commodity
+        'market': 'Nairobi',    # Updated to include market
+        'quantity': 1000,
+        'supply': 1200,
+        'demand': 1100
     }
     print(f'Predicted Price: {predict_price(input_data)}')

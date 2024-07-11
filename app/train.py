@@ -3,7 +3,6 @@ from sklearn.metrics import mean_squared_error
 import joblib
 from preprocess import preprocess_data
 
-
 def train_model():
     X_train, X_test, y_train, y_test = preprocess_data('data/commodity_prices.csv')
     
